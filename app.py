@@ -95,7 +95,8 @@ if page == "Today's Practice":
     # Feature 1: The Audio Wake Up Prompt
     st.subheader("🔊 Audio Reality Check")
     st.write("Click below to play a voice checkpoint:")
-    st.audio("https://soundhelix.com")
+    st.audiost.audio("https://google.com")
+
     
     # Feature 2: Active Reality State Testing
     st.subheader("❓ Reality Check")
@@ -159,4 +160,3 @@ elif page == "My Analytics":
     if not df_dreams.empty:
         st.subheader("Past Dream Entries")
         st.dataframe(df_dreams, use_container_width=True)
-        
