@@ -95,7 +95,7 @@ if page == "Today's Practice":
     # Feature 1: The Audio Wake Up Prompt
     st.subheader("🔊 Audio Reality Check")
     st.write("Click below to play a voice checkpoint:")
-    st.audiost.audio("https://google.com")
+    st.audio("https://google.com")
 
     
     # Feature 2: Active Reality State Testing
