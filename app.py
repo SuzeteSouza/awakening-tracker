@@ -7,7 +7,6 @@ import hashlib
 # -------------------------------------------------------------
 # 1. DATABASE CONFIGURATION
 # -------------------------------------------------------------
-# Connects to a local database file. Streamlit will auto-create this file.
 conn = sqlite3.connect("awakening.db", check_same_thread=False)
 cursor = conn.cursor()
 
@@ -59,7 +58,6 @@ GNOSTIC_QUOTES = [
 ]
 
 def get_daily_quote():
-    """Generates a stable index based on today's date string so it changes exactly once a day."""
     today_str = datetime.today().strftime('%Y-%m-%d')
     hash_object = hashlib.md5(today_str.encode())
     index = int(hash_object.hexdigest(), 16) % len(GNOSTIC_QUOTES)
@@ -78,7 +76,6 @@ page = st.sidebar.radio("Navigate", ["Today's Practice", "Dream Log", "My Analyt
 if page == "Today's Practice":
     st.title("👁️ The Here and Now")
     
-    # Daily Gnostic Contemplation Layout
     daily_data = get_daily_quote()
     st.markdown(f"### 🕯️ Daily Gnosis Contemplation")
     st.markdown(
@@ -92,11 +89,16 @@ if page == "Today's Practice":
         unsafe_allow_html=True
     )
     
-    # Feature 1: The Audio Wake Up Prompt
+    # Feature 1: The Audio Wake Up Prompt (FIXED BINARY DATA STREAM)
     st.subheader("🔊 Audio Reality Check")
     st.write("Click below to play a voice checkpoint:")
-    st.audio("https://google.com")
-
+    
+    try:
+        with open("awakening_bell.mp3", "rb") as audio_file:
+            audio_bytes = audio_file.read()
+        st.audio(audio_bytes, format="audio/mp3")
+    except FileNotFoundError:
+        st.error("Audio file 'awakening_bell.mp3' not found in repository. Please upload it via GitHub.")
     
     # Feature 2: Active Reality State Testing
     st.subheader("❓ Reality Check")
